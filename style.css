@@ -1,0 +1,78 @@
+*{margin: 0px;padding: 0px;}
+button{
+    display: block;
+    width: 250px;
+    height: 50px;
+    margin: 350px auto;
+    background: yellow;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+}
+.modal-bg{
+    /* display: none; */
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: rgba(3, 3, 3, 0);
+    z-index: 1001;
+    animation: modal-bg .3s linear forwards;
+}
+@keyframes modal-bg{
+    100%{background: rgba(3, 3, 3, .3)};
+}
+.modal{
+    max-width: 500px;
+    border-radius: 20px;
+    margin: 0px auto;
+    background: white;
+    opacity: 0;
+    padding: 15px;
+    animation: modal .3s linear forwards;
+}
+@keyframes modal{
+    100%{margin-top: 25px;opacity: 1;}
+}
+.modal-header , .modal-content , .modal-footer{
+    /* width: 100%; */
+    padding: 15px;
+}
+/* .modal-header{
+    height: 50px;
+    line-height: 50px;
+}
+.modal-content{
+    height: 65px;
+    line-height: 65px;
+} */
+.modal-footer{
+    display: flex;
+    justify-content:flex-end;
+}
+.modal-footer-input input{
+    width: 80px;
+    height: 35px;
+    border-radius: 5px;
+    outline: inherit;
+    cursor: pointer;
+}
+.modal-footer-input input:first-child{
+    border: 1px solid #ccc;
+    background: #fff;
+}
+.modal-footer-input input:first-child:hover{
+    background: #eee;
+}
+.modal-footer-input input:last-child{
+    border: none;
+    background: #337ab7;
+    color: white;
+}
+.modal-footer-input input:last-child:hover{
+    background: #286090;
+}
+.modal div:not(:last-child){
+    border-bottom: 1px solid #e5e5e5;
+}

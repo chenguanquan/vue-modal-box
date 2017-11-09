@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"><script src="vue.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <button  @click="flag = true">hello</button>
+        <x-modal 
+            v-bind:flag="flag" 
+            v-on:receive="yincang"
+            v-on:unreceive="unyincang"
+            btn-value="今天吃什么"
+        >
+            <!-- <p slot="modal-content">
+                吃炸鸡
+            </p> -->
+            <template slot="modal-content">
+                <ul>
+                    <li>123</li>
+                    <li>456</li>
+                    <li>789</li>
+                </ul>
+            </template>
+        </x-modal>
+    </div>
+
+
+    <script>
+        Vue.component("x-modal" , {
+            props:{
+                flag:{
+                    type: Boolean,
+                    default: false
+                },
+                btnValue:{
+                    type: String,
+                    default: "《标题》"
+                }
+            },
+            template: `
+                <div class="modal-bg" v-show="flag" @click="cancel">
+                    <div class="modal" @click.stop="uncancel">
+                        <div class="modal-header">
+                            {{ btnValue }}
+                        </div>
+                        <div class="modal-content">
+                            <slot name="modal-content">《内容》</slot>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="modal-footer-input">
+                                <input type="button" value="取消" @click.stop="cancel">
+                                <input type="button" value="确认">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            methods: {
+                cancel(){
+                    this.$emit("receive");
+                },
+                uncancel(){
+                    this.$emit("unreceive");
+                }
+            }
+        });
+
+        var modal = new Vue({
+            el: "#app",
+            data: {
+                flag: false
+            },
+            methods: {
+                yincang(){
+                    this.flag = false;
+                },
+                unyincang(){
+                    this.flag = true;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
