@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>modal</title>
+    <style>
+        button{
+            display: block;
+            width: 250px;
+            height: 50px;
+            margin: 350px auto;
+            background: skyblue;
+            font-size: 30px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="flag = true">点击</button>
+        <x-modal 
+            v-bind:flag="flag" 
+            v-on:receive="receive" 
+            v-on:unreceive="unreceive"
+        >
+        </x-modal>
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script src="vue-modal.js"></script>
+<script>
+
+    var modal = new Vue({
+        el: "#app",
+        data: {
+            flag: false
+        },
+        methods: {
+            receive() {
+                this.flag = false;
+            },
+            unreceive() {
+                this.flag = true;
+            }
+        }
+    })
+
+    /*
+        使用方法（模态框）：
+            1.引进css文件和js文件
+            2.定义vue实例，"flag" : 为true时弹出模态框，为false时隐藏
+            3.在需要点击的地方加入 : @click="flag = true"
+            4.title-value : 自定义模态框标题（字符串）
+            5.slot="modal-content" : 自定义内容（可更换标签--例：
+                <ul slot="modal-content">
+                    <li></li>    
+                </ul>
+            ）
+            6.  <x-modal
+                    v-bind:flag="flag"          //初始化隐藏
+                    v-on:receive="receive"      //点击模态框取消事件
+                    v-on:unreceive="unreceive"  //阻止捕捉事件
+                ></x-modal>
+            7.var modal = new Vue({
+                    el: "#app",
+                    data: {
+                    flag: false
+                },
+                methods: {
+                    receive() {
+                        this.flag = false;
+                    },
+                    unreceive() {
+                        this.flag = true;
+                    }
+                }
+            })
+    */
+</script>
